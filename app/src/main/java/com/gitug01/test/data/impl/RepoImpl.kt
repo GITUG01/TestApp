@@ -1,5 +1,6 @@
 package com.gitug01.test.data.impl
 
+import android.util.Log
 import com.gitug01.test.data.retrofit.TaskApi
 import com.gitug01.test.domain.ImageEntity
 import com.gitug01.test.domain.MainContract
@@ -38,6 +39,7 @@ class RepoImpl(val api: TaskApi, val callback: DataCallback) : MainContract.Repo
             }, { error ->
                 error.printStackTrace()
             }, {
+                Log.d("rx", "callback")
                 callback.getImagesCallback(filtedList)
             })
     }
