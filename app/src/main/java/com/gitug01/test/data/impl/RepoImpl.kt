@@ -8,7 +8,7 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.schedulers.Schedulers
 
-class RepoImpl(val api: TaskApi, val callback: DataCallback) : MainContract.Repository {
+class RepoImpl(private val api: TaskApi, private val callback: DataCallback) : MainContract.Repository {
 
     private val imagesResultList: Observable<String> = Observable.create { subscriber ->
         api.getImagesRx()

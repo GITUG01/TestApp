@@ -16,7 +16,6 @@ import com.gitug01.test.domain.MainContract
 import com.gitug01.test.domain.MainPresenter
 import com.gitug01.test.domain.app
 import com.gitug01.test.ui.ImageAdapter
-import kotlin.concurrent.thread
 
 class HomeScreenFragment : Fragment(), MainContract.View, OnImageClickListener {
 
@@ -24,7 +23,7 @@ class HomeScreenFragment : Fragment(), MainContract.View, OnImageClickListener {
     private lateinit var refreshLayout: SwipeRefreshLayout
     private val imageAdapter: ImageAdapter = ImageAdapter(this)
 
-    lateinit var api: TaskApi
+    private lateinit var api: TaskApi
 
     private val mPresenter by lazy { MainPresenter(this, api) }
 
@@ -55,12 +54,12 @@ class HomeScreenFragment : Fragment(), MainContract.View, OnImageClickListener {
         }
     }
 
-    fun init(view: View) {
+    private fun init(view: View) {
         imageRecyclerView = view.findViewById(R.id.image_recycler_view)
         refreshLayout = view.findViewById(R.id.refresh_layout)
     }
 
-    fun prepareToWorkWithRecyclerView() {
+    private fun prepareToWorkWithRecyclerView() {
 
         if (requireContext().resources.configuration.smallestScreenWidthDp >= 650) {
             imageRecyclerView.layoutManager =
@@ -82,7 +81,7 @@ class HomeScreenFragment : Fragment(), MainContract.View, OnImageClickListener {
             )
         )
 
-        imageRecyclerView.let { it.adapter = imageAdapter }
+        imageRecyclerView.adapter = imageAdapter
     }
 
     override fun setImages(data: List<ImageEntity>) {
